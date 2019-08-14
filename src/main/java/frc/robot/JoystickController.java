@@ -2,6 +2,10 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 
+/**
+ * Created by imadan on 8/14/19.
+ */
+
 public class JoystickController {
 
     public Joystick controller;

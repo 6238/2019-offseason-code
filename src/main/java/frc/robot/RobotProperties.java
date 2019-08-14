@@ -7,6 +7,10 @@ import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+/**
+ * Created by imadan on 8/14/19.
+ */
+
 public class RobotProperties {
     JoystickController joystick;
 
@@ -42,5 +46,9 @@ public class RobotProperties {
         rearRight.setInverted(true);
 
         robotDrive = new MecanumDrive(frontLeft, rearLeft, frontRight, rearRight);
+    }
+
+    public MecanumDrive getRobotDrive() {
+        return robotDrive;
     }
 }
