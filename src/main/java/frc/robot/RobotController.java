@@ -1,7 +1,7 @@
 package frc.robot;
 
 /**
- * Created by imadan on 8/14/19.
+ * @author ishanmadan
  */
 
 public interface RobotController {
@@ -18,6 +18,7 @@ public interface RobotController {
      *         possible we can use suppliers and completable futures to handle this
      *         in a more complex manner.
      */
+    
     boolean performAction(RobotProperties properties);
 
     String getName();

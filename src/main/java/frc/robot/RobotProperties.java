@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * Created by imadan on 8/14/19.
+ * @author ishanmadan
  */
 
 public class RobotProperties {

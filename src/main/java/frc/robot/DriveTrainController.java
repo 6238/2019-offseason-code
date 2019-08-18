@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * Created by imadan on 8/14/19.
+ * @author ishanmadan
  */
 public class DriveTrainController implements RobotController {
     // speed multiplier/reducer
@@ -41,6 +41,7 @@ public class DriveTrainController implements RobotController {
         SmartDashboard.putBoolean("brakeMode", brakeMode);
         SmartDashboard.putBoolean("absoluteDrive", absoluteDrive);
         SmartDashboard.putBoolean("selfAlign", selfAlign);
+        SmartDashboard.putBoolean("straightDrive", straightDrive);
     }
 
     // name function for initial testing
@@ -51,6 +52,8 @@ public class DriveTrainController implements RobotController {
 
     @Override
     public boolean performAction(RobotProperties properties) {
+
+        // get robotDrive, refresh values on dashboard
 
         MecanumDrive robotDrive = properties.getRobotDrive();
 
@@ -65,6 +68,8 @@ public class DriveTrainController implements RobotController {
         brakeMode = SmartDashboard.getBoolean("brakeMode", brakeMode);
 
         absoluteDrive = SmartDashboard.getBoolean("absoluteDrive", absoluteDrive);
+
+        SmartDashboard.putBoolean("straightDrive", straightDrive);
 
         if (selfAlign) {
             if (properties.joystick.getJoystickZ() == 0) {
@@ -88,7 +93,6 @@ public class DriveTrainController implements RobotController {
                     // normal driving
                     robotDrive.driveCartesian(insanityFactor * properties.joystick.getJoystickX(), -insanityFactor * properties.joystick.getJoystickY(), turningValue);
                 }
-
             } else {
                 kAngleSetpoint = properties.gyro.getAngle();
                 straightDrive = false;
@@ -105,19 +109,18 @@ public class DriveTrainController implements RobotController {
             }
 
         } else if (joyDrive) {
-            kAngleSetpoint = properties.gyro.getAngle();
-            straightDrive = false;
+            kAngleSetpoint = properties.gyro.getAngle(); // set the straight driving angle to the current angle
+            straightDrive = false; // not straight driving
             if (reverseDrive) {
                 // reverse driving
                 robotDrive.driveCartesian(-insanityFactor * properties.joystick.getJoystickX(), insanityFactor * properties.joystick.getJoystickY(), insanityFactor * properties.joystick.getJoystickZ());
             } else if (absoluteDrive) {
-                // absolute driving
+                // absolute driving (drive relative to the field, not to the robot)
                 robotDrive.driveCartesian(insanityFactor * properties.joystick.getJoystickX(), -insanityFactor * properties.joystick.getJoystickY(), insanityFactor * properties.joystick.getJoystickZ(), kAngleSetpoint);
             } else {
                 // normal driving
                 robotDrive.driveCartesian(insanityFactor * properties.joystick.getJoystickX(), -insanityFactor * properties.joystick.getJoystickY(), insanityFactor * properties.joystick.getJoystickZ());
             }
-            /*  */
 
         }
 
