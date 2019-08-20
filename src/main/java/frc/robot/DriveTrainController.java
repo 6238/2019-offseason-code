@@ -24,14 +24,14 @@ public class DriveTrainController implements RobotController {
     // absolute drive
     boolean absoluteDrive = false;
 
-    // self align
-    boolean selfAlign = false;
-
     // straight driving
     boolean straightDrive = false;
 
-    private double kAngleSetpoint = 0.0;
-    private double kP = 0.1;
+    // self align
+    boolean selfAlign = false;
+
+    private double headingAngle = 0.0; // the direction the straight driving code aims to stay on
+    private double spinFactor = 0.01; // product of heading error & spinFactor is the Z-value given to straight driving code
 
     public DriveTrainController() {
         // send values to dashboard
@@ -40,8 +40,11 @@ public class DriveTrainController implements RobotController {
         SmartDashboard.putBoolean("joyDrive", joyDrive);
         SmartDashboard.putBoolean("brakeMode", brakeMode);
         SmartDashboard.putBoolean("absoluteDrive", absoluteDrive);
-        SmartDashboard.putBoolean("selfAlign", selfAlign);
         SmartDashboard.putBoolean("straightDrive", straightDrive);
+        SmartDashboard.putBoolean("selfAlign", selfAlign);
+
+        SmartDashboard.putNumber("headingAngle", headingAngle);
+        SmartDashboard.putNumber("spinFactor", spinFactor);
     }
 
     // name function for initial testing
@@ -57,25 +60,66 @@ public class DriveTrainController implements RobotController {
 
         MecanumDrive robotDrive = properties.getRobotDrive();
 
-        selfAlign = SmartDashboard.getBoolean("selfAlign", false);
+        insanityFactor = SmartDashboard.getNumber("insanityFactor", 0.5);
+        reverseDrive = SmartDashboard.getBoolean("reverseDrive", false);
+        joyDrive = SmartDashboard.getBoolean("joyDrive", true);
+        brakeMode = SmartDashboard.getBoolean("brakeMode", true);
+        absoluteDrive = SmartDashboard.getBoolean("absoluteDrive", false);
+        straightDrive = SmartDashboard.getBoolean("straightDrive", false);
+        SmartDashboard.putBoolean("selfAlign", selfAlign);
 
-        insanityFactor = SmartDashboard.getNumber("insanityFactor", insanityFactor);
+        spinFactor = SmartDashboard.getNumber("spinFactor", 0.01);
 
-        reverseDrive = SmartDashboard.getBoolean("reverseDrive", reverseDrive);
+        /**
+         * insanityFactor is a driver-controlled variable that lets the driver change the robot's
+         * maximum speed. By default, insanityFactor is set at 0.5, since the robot at full speed
+         * is much too fast. insanityFactor should only be set from the driver dashboard, and should
+         * not be changed in the program.
+         * 
+         * 
+         * reverseDrive was intended for the 2019 season, when there was a plan to use the back of
+         * the robot to attach hatch panels. It's fairly straightforward, it just switches the
+         * forward/backward controls and the right/left controls, so the driver can drive as if the
+         * back of the robot is forward, and the front of the robot is backward.
+         * 
+         * 
+         * joyDrive gives control of the robot to the joystick, and should ALWAYS be enabled. It was
+         * originally somewhat of a joke, as disabling it would allow the driver to control the robot
+         * not from the joystick, but from the mecanumDrive info panel on the driver dashboard.
+         * WARNING: DO NOT DISABLE joyDrive FOR ANY REASON.
+         * 
+         * 
+         * brakeMode allows the driver to toggle between brake mode and coast mode, for when the
+         * joystick values are set back to zero (the driver let go of the joystick). brakeMode is
+         * enabled by default, as the drivers prefer the robot to stop immediately.
+         * 
+         * 
+         * absoluteDrive allows the driver to drive relative to the field, rather than the robot
+         * itself. Forward would be defined as straight down the field, away from the driver.
+         * absoluteDrive is disabled by default, and may not work.
+         * 
+         * 
+         * straightDrive is a driver-enabled feature that keeps the robot going in one direction when:
+         * a. straightDrive is enabled
+         * b. the driver is not twisting the joystick (joyZ == 0)
+         * 
+         * When the driver enables straightDrive, the robot may not begin aligning itself immediately,
+         * it only starts aligning when joyZ = 0. When the driver has enabled straightDrive, they
+         * receive a visual indication on their driver dashboard. The driver knows that the robot is
+         * aligning itself when the selfAlign toggle is also on. selfAlign will be on as long as the
+         * robot is aligning itself. When the robot stops selfAligning, either because the driver
+         * disabled straightDrive or because the driver twisted the joystick, selfAlign will
+         * immediately switch off.
+         * 
+         * WARNING: As of 8/19/19, straightDrive does not work, and should not be used.
+         */
 
-        joyDrive = SmartDashboard.getBoolean("joyDrive", joyDrive);
-
-        brakeMode = SmartDashboard.getBoolean("brakeMode", brakeMode);
-
-        absoluteDrive = SmartDashboard.getBoolean("absoluteDrive", absoluteDrive);
-
-        SmartDashboard.putBoolean("straightDrive", straightDrive);
-
-        if (selfAlign) {
+        if (straightDrive) { // enable alignment mode, only tries to align when driver is not changing joyZ
             if (properties.joystick.getJoystickZ() == 0) {
-                straightDrive = true;
+                selfAlign = true; // tell driver selfAlign is working
 
-                double turningValue = (kAngleSetpoint - properties.gyro.getAngle()) * kP;
+                double turningValue = (headingAngle - properties.gyro.getAngle()) * spinFactor;
+                    // turningValue is z-value given to robotDrive, must be less than 0.5 or robot spins out of control
 
                 if (turningValue > 0.5) {
                     turningValue = 0.5;
@@ -88,20 +132,20 @@ public class DriveTrainController implements RobotController {
                     robotDrive.driveCartesian(-insanityFactor * properties.joystick.getJoystickX(), insanityFactor * properties.joystick.getJoystickY(), turningValue);
                 } else if (absoluteDrive) {
                     // absolute driving
-                    robotDrive.driveCartesian(insanityFactor * properties.joystick.getJoystickX(), -insanityFactor * properties.joystick.getJoystickY(), turningValue, kAngleSetpoint);
+                    robotDrive.driveCartesian(insanityFactor * properties.joystick.getJoystickX(), -insanityFactor * properties.joystick.getJoystickY(), turningValue, headingAngle);
                 } else {
                     // normal driving
                     robotDrive.driveCartesian(insanityFactor * properties.joystick.getJoystickX(), -insanityFactor * properties.joystick.getJoystickY(), turningValue);
                 }
             } else {
-                kAngleSetpoint = properties.gyro.getAngle();
-                straightDrive = false;
+                headingAngle = properties.gyro.getAngle(); // set heading to current direction, as soon as driver releases joyZ, the saved direction will be used
+                selfAlign = false; // tell driver selfAlign is not working
                 if (reverseDrive) {
                     // reverse driving
                     robotDrive.driveCartesian(-insanityFactor * properties.joystick.getJoystickX(), insanityFactor * properties.joystick.getJoystickY(), insanityFactor * properties.joystick.getJoystickZ());
                 } else if (absoluteDrive) {
                     // absolute driving
-                    robotDrive.driveCartesian(insanityFactor * properties.joystick.getJoystickX(), -insanityFactor * properties.joystick.getJoystickY(), insanityFactor * properties.joystick.getJoystickZ(), kAngleSetpoint);
+                    robotDrive.driveCartesian(insanityFactor * properties.joystick.getJoystickX(), -insanityFactor * properties.joystick.getJoystickY(), insanityFactor * properties.joystick.getJoystickZ(), headingAngle);
                 } else {
                     // normal driving
                     robotDrive.driveCartesian(insanityFactor * properties.joystick.getJoystickX(), -insanityFactor * properties.joystick.getJoystickY(), insanityFactor * properties.joystick.getJoystickZ());
@@ -109,14 +153,14 @@ public class DriveTrainController implements RobotController {
             }
 
         } else if (joyDrive) {
-            kAngleSetpoint = properties.gyro.getAngle(); // set the straight driving angle to the current angle
-            straightDrive = false; // not straight driving
+            headingAngle = properties.gyro.getAngle(); // set straightDrive heading to current direction, if driver switches to straightDrive, saved heading will be used
+            selfAlign = false; // tell driver selfAlign is not on (obviously)
             if (reverseDrive) {
                 // reverse driving
                 robotDrive.driveCartesian(-insanityFactor * properties.joystick.getJoystickX(), insanityFactor * properties.joystick.getJoystickY(), insanityFactor * properties.joystick.getJoystickZ());
             } else if (absoluteDrive) {
                 // absolute driving (drive relative to the field, not to the robot)
-                robotDrive.driveCartesian(insanityFactor * properties.joystick.getJoystickX(), -insanityFactor * properties.joystick.getJoystickY(), insanityFactor * properties.joystick.getJoystickZ(), kAngleSetpoint);
+                robotDrive.driveCartesian(insanityFactor * properties.joystick.getJoystickX(), -insanityFactor * properties.joystick.getJoystickY(), insanityFactor * properties.joystick.getJoystickZ(), headingAngle);
             } else {
                 // normal driving
                 robotDrive.driveCartesian(insanityFactor * properties.joystick.getJoystickX(), -insanityFactor * properties.joystick.getJoystickY(), insanityFactor * properties.joystick.getJoystickZ());

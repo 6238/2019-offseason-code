@@ -51,4 +51,19 @@ public class RobotProperties {
     public MecanumDrive getRobotDrive() {
         return robotDrive;
     }
+
+    public void pushData(RobotProperties properties) {
+        // sends input, data values to SmartDashboard
+        SmartDashboard.putNumber("Joystick X", properties.joystick.getJoystickX());
+        SmartDashboard.putNumber("Joystick Y", properties.joystick.getJoystickY());
+        SmartDashboard.putNumber("Joystick Z", properties.joystick.getJoystickZ());
+
+        SmartDashboard.putNumber("Shutoff", properties.joystick.getSlider());
+
+        SmartDashboard.putData(properties.getRobotDrive());
+
+        SmartDashboard.putData("Gyro", gyro);
+        
+        SmartDashboard.putData("pdp", pdp);
+    }
 }
