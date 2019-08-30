@@ -40,7 +40,7 @@
 - Download Fork from [https://git-fork.com](https://git-fork.com)
 - Mac: Drag Fork app to /Applications folder (or wherever you want)
 - Windows: Run ForkInstaller.exe
-- Whatever git client & OS: clone [https://github.com/6238/2019-offseason-code.git](https://github.com/6238/2019-offseason-code.git) and [https://github.com/6238/2019-robot-new.git](https://github.com/6238/2019-robot-new.git) (https) or git\@github\.com:6238/2019-offseason-code.git and git\@github\.com:6238/2019-robot-code-new.git (ssh)
+- Whatever git client & OS: clone [https://github.com/6238/2019-offseason-code.git](https://github.com/6238/2019-offseason-code.git) and [https://github.com/6238/2019-robot-new.git](https://github.com/6238/2019-robot-new.git) (https) or git<span>@</span>github.com:6238/2019-offseason-code.git and git<span>@</span>github.com:6238/2019-robot-code-new.git (ssh)
 - If you don’t know or care about the differences between https and ssh, just go with https
 
 ## LabView - PC Only
