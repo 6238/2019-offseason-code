@@ -16,5 +16,6 @@ public class IntakeController implements RobotController {
     @Override
     public boolean performAction(RobotProperties properties) {
         
+        return true;
     }
 }
