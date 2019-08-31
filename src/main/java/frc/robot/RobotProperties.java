@@ -4,8 +4,8 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -25,10 +25,10 @@ public class RobotProperties {
 
     public Compressor compressor;
 
-    public Solenoid elevatorLeft;
-    public Solenoid elevatorRight;
+    public DoubleSolenoid elevatorLeft;
+    public DoubleSolenoid elevatorRight;
 
-    public Solenoid intakeSolenoid;
+    public DoubleSolenoid intakeSolenoid;
 
     public WPI_TalonSRX intakeLeft;
     public WPI_TalonSRX intakeRight;
@@ -44,18 +44,20 @@ public class RobotProperties {
 
         pdp = new PowerDistributionPanel();
 
-        frontLeft = new WPI_TalonSRX(4);
-        frontRight = new WPI_TalonSRX(3);
-        rearLeft = new WPI_TalonSRX(2);
-        rearRight = new WPI_TalonSRX(1);
+        frontLeft = new WPI_TalonSRX(14);
+        frontRight = new WPI_TalonSRX(13);
+        rearLeft = new WPI_TalonSRX(12);
+        rearRight = new WPI_TalonSRX(11);
 
-        elevatorLeft = new Solenoid(5);
-        elevatorRight = new Solenoid(6);
+        elevatorLeft = new DoubleSolenoid(2, 3);
+        elevatorRight = new DoubleSolenoid(4, 5);
 
-        compressor = new Compressor(7);
+        compressor = new Compressor(6);
 
-        intakeLeft = new WPI_TalonSRX(8);
-        intakeRight = new WPI_TalonSRX(9);
+        intakeLeft = new WPI_TalonSRX(7);
+        intakeRight = new WPI_TalonSRX(8);
+
+        intakeSolenoid = new DoubleSolenoid(9, 10);
         
         SmartDashboard.putBoolean("selfAlign", false);
         SmartDashboard.putBoolean("ReverseTurn", false);
@@ -83,16 +85,20 @@ public class RobotProperties {
         return compressor;
     }
 
-    public Solenoid elevatorLeft() {
+    public DoubleSolenoid getElevatorLeft() {
         return elevatorLeft;
     }
 
-    public Solenoid elevatorRight() {
+    public DoubleSolenoid getElevatorRight() {
         return elevatorRight;
     }
 
     public MecanumDrive getRobotDrive() {
         return robotDrive;
+    }
+
+    public DoubleSolenoid getIntakeSolenoid() {
+        return intakeSolenoid;
     }
 
     public void pushData(RobotProperties properties) {
@@ -103,10 +109,20 @@ public class RobotProperties {
 
         SmartDashboard.putNumber("Shutoff", properties.joystick.getSlider());
 
-        SmartDashboard.putData(properties.getRobotDrive());
+        SmartDashboard.putData("RobotDrive", properties.getRobotDrive());
 
         SmartDashboard.putData("Gyro", gyro);
         
         SmartDashboard.putData("pdp", pdp);
+
+        SmartDashboard.putData("compressor", compressor);
+        
+        SmartDashboard.putData("elevatorLeft", elevatorLeft);
+        SmartDashboard.putData("elevatorRight", elevatorRight);
+
+        SmartDashboard.putData("intakeSolenoid", intakeSolenoid);
+
+        SmartDashboard.putData("intakeLeft", intakeLeft);
+        SmartDashboard.putData("intakeRight", intakeRight);
     }
 }

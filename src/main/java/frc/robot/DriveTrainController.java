@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * @author ishanmadan
  */
 public class DriveTrainController implements RobotController {
+    RobotProperties properties = new RobotProperties();
+    MecanumDrive robotDrive = properties.getRobotDrive();
     // speed multiplier/reducer
     double insanityFactor = 0.5;
 
@@ -45,6 +47,7 @@ public class DriveTrainController implements RobotController {
 
         SmartDashboard.putNumber("headingAngle", headingAngle);
         SmartDashboard.putNumber("spinFactor", spinFactor);
+        
     }
 
     // name function for initial testing
@@ -58,7 +61,7 @@ public class DriveTrainController implements RobotController {
 
         // get robotDrive, refresh values on dashboard
 
-        MecanumDrive robotDrive = properties.getRobotDrive();
+        
 
         insanityFactor = SmartDashboard.getNumber("insanityFactor", 0.5);
         reverseDrive = SmartDashboard.getBoolean("reverseDrive", false);
