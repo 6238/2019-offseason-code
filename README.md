@@ -83,7 +83,7 @@
 - Check all install boxes available
 - Complete installation
 
-###Mac/Linux:
+### Mac/Linux:
 - Unzip “CTRE_Phoenix_FRC_nonWindows_X.X.X.zip”
 - Drag “vendordeps” folder from unzipped folder to ~/frc2019
 - Drag “ctre” folder from maven/com (inside unzipped folder) to ~/frc2019/maven/com
@@ -92,7 +92,7 @@
 - Select “Install new libraries (offline)”, check box next to “CTRE-Phoenix”, click “OK”
 - Click “Yes” in “Recommended to run a Build” window
 
-##Radio Configuration Utility - PC Only
+## Radio Configuration Utility - PC Only
 - [https://wpilib.screenstepslive.com/s/4485/m/13503/l/144986-programming-your-radio-for-home-use](https://wpilib.screenstepslive.com/s/4485/m/13503/l/144986-programming-your-radio-for-home-use)
 - Download From: [https://firstfrc.blob.core.windows.net/frc2019/Radio/FRC_Radio_Configuration\_19\_1_1.zip](https://firstfrc.blob.core.windows.net/frc2019/Radio/FRC_Radio_Configuration_19_1_1.zip)
 - Extract exe installer from zip, follow installation instructions
