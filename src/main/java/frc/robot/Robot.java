@@ -33,6 +33,8 @@ public class Robot extends TimedRobot {
     properties = new RobotProperties();
     controllers = new ArrayList<RobotController>();
     controllers.add(new DriveTrainController());
+    controllers.add(new IntakeController());
+    controllers.add(new ElevatorController());
   }
 
   /**

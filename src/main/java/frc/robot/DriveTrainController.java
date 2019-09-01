@@ -60,9 +60,6 @@ public class DriveTrainController implements RobotController {
     public boolean performAction(RobotProperties properties) {
 
         // get robotDrive, refresh values on dashboard
-
-        
-
         insanityFactor = SmartDashboard.getNumber("insanityFactor", 0.5);
         reverseDrive = SmartDashboard.getBoolean("reverseDrive", false);
         joyDrive = SmartDashboard.getBoolean("joyDrive", true);
