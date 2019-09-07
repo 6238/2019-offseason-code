@@ -114,7 +114,7 @@ public class DriveTrainController implements RobotController {
          * WARNING: As of 8/19/19, straightDrive does not work, and should not be used.
          */
 
-        if (straightDrive) { // enable alignment mode, only tries to align when driver is not changing joyZ
+        /* if (straightDrive) { // enable alignment mode, only tries to align when driver is not changing joyZ
             if (properties.joystick.getJoystickZ() == 0) {
                 selfAlign = true; // tell driver selfAlign is working
 
@@ -152,8 +152,8 @@ public class DriveTrainController implements RobotController {
                 }
             }
 
-        } else if (joyDrive) {
-            headingAngle = properties.gyro.getAngle(); // set straightDrive heading to current direction, if driver switches to straightDrive, saved heading will be used
+        } else  */if (joyDrive) {
+            // headingAngle = properties.gyro.getAngle(); // set straightDrive heading to current direction, if driver switches to straightDrive, saved heading will be used
             selfAlign = false; // tell driver selfAlign is not on (obviously)
             if (reverseDrive) {
                 // reverse driving

@@ -40,27 +40,24 @@ public class RobotProperties {
     public RobotProperties() {
         joystick = new JoystickController(0);
 
-        gyro = new ADXRS450_Gyro();
+        // gyro = new ADXRS450_Gyro();
 
-        pdp = new PowerDistributionPanel();
+        pdp = new PowerDistributionPanel(1);
 
-        frontLeft = new WPI_TalonSRX(14);
-        frontRight = new WPI_TalonSRX(13);
-        rearLeft = new WPI_TalonSRX(12);
-        rearRight = new WPI_TalonSRX(11);
+        frontLeft = new WPI_TalonSRX(4);
+        frontRight = new WPI_TalonSRX(3);
+        rearLeft = new WPI_TalonSRX(2);
+        rearRight = new WPI_TalonSRX(1);
 
-        elevatorLeft = new DoubleSolenoid(2, 3);
-        elevatorRight = new DoubleSolenoid(4, 5);
+        // elevatorLeft = new DoubleSolenoid(2, 3);
+        // elevatorRight = new DoubleSolenoid(4, 5);
 
-        compressor = new Compressor(6);
+        // compressor = new Compressor(6);
 
         intakeLeft = new WPI_TalonSRX(7);
         intakeRight = new WPI_TalonSRX(8);
 
-        intakeSolenoid = new DoubleSolenoid(9, 10);
-        
-        SmartDashboard.putBoolean("selfAlign", false);
-        SmartDashboard.putBoolean("ReverseTurn", false);
+        // intakeSolenoid = new DoubleSolenoid(9, 10);
 
         frontLeft.setInverted(true);
         frontRight.setInverted(true);
@@ -81,7 +78,7 @@ public class RobotProperties {
         return intakeRight;
     }
 
-    public Compressor getCompressor() {
+    /* public Compressor getCompressor() {
         return compressor;
     }
 
@@ -91,15 +88,15 @@ public class RobotProperties {
 
     public DoubleSolenoid getElevatorRight() {
         return elevatorRight;
-    }
+    } */
 
     public MecanumDrive getRobotDrive() {
         return robotDrive;
     }
 
-    public DoubleSolenoid getIntakeSolenoid() {
+    /* public DoubleSolenoid getIntakeSolenoid() {
         return intakeSolenoid;
-    }
+    } */
 
     public void pushData(RobotProperties properties) {
         // sends input, data values to SmartDashboard
@@ -111,16 +108,16 @@ public class RobotProperties {
 
         SmartDashboard.putData("RobotDrive", properties.getRobotDrive());
 
-        SmartDashboard.putData("Gyro", gyro);
+        // SmartDashboard.putData("Gyro", gyro);
         
         SmartDashboard.putData("pdp", pdp);
 
-        SmartDashboard.putData("compressor", compressor);
+        /* SmartDashboard.putData("compressor", compressor);
         
         SmartDashboard.putData("elevatorLeft", elevatorLeft);
         SmartDashboard.putData("elevatorRight", elevatorRight);
 
-        SmartDashboard.putData("intakeSolenoid", intakeSolenoid);
+        SmartDashboard.putData("intakeSolenoid", intakeSolenoid); */
 
         SmartDashboard.putData("intakeLeft", intakeLeft);
         SmartDashboard.putData("intakeRight", intakeRight);
