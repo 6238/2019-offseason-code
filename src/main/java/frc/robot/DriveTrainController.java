@@ -147,7 +147,7 @@ public class DriveTrainController implements RobotController {
                     robotDrive.driveCartesian(-insanityFactor * properties.joystick.getJoystickX(), insanityFactor * properties.joystick.getJoystickY(), insanityFactor * properties.joystick.getJoystickZ());
                 } else if (absoluteDrive) {
                     // absolute driving
-                    robotDrive.driveCartesian(insanityFactor * properties.joystick.getJoystickX(), -insanityFactor * properties.joystick.getJoystickY(), insanityFactor * properties.joystick.getJoystickZ(), headingAngle);
+                    robotDrive.driveCartesian(insanityFactor * properties.joystick.getJoystickX(), -insanityFactor * properties.joystick.getJoystickY(), insanityFactor * properties.joystick.getJoystickZ(), -properties.gyro.getAngle());
                 } else {
                     // normal driving
                     robotDrive.driveCartesian(insanityFactor * properties.joystick.getJoystickX(), -insanityFactor * properties.joystick.getJoystickY(), insanityFactor * properties.joystick.getJoystickZ());
@@ -162,7 +162,7 @@ public class DriveTrainController implements RobotController {
                 robotDrive.driveCartesian(-insanityFactor * properties.joystick.getJoystickX(), insanityFactor * properties.joystick.getJoystickY(), insanityFactor * properties.joystick.getJoystickZ());
             } else if (absoluteDrive) {
                 // absolute driving (drive relative to the field, not to the robot)
-                robotDrive.driveCartesian(insanityFactor * properties.joystick.getJoystickX(), -insanityFactor * properties.joystick.getJoystickY(), insanityFactor * properties.joystick.getJoystickZ(), headingAngle);
+                robotDrive.driveCartesian(insanityFactor * properties.joystick.getJoystickX(), -insanityFactor * properties.joystick.getJoystickY(), insanityFactor * properties.joystick.getJoystickZ(), -properties.gyro.getAngle());
             } else {
                 // normal driving
                 robotDrive.driveCartesian(insanityFactor * properties.joystick.getJoystickX(), -insanityFactor * properties.joystick.getJoystickY(), insanityFactor * properties.joystick.getJoystickZ());
