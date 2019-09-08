@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * @author ishanmadan
  */
 public class IntakeController implements RobotController {
-    RobotProperties properties = new RobotProperties();
+    RobotProperties properties;
 
     WPI_TalonSRX intakeLeft = properties.getIntakeLeft();
     WPI_TalonSRX intakeRight = properties.getIntakeRight();
@@ -24,8 +24,9 @@ public class IntakeController implements RobotController {
 
     double intakeSpeed = 0.5;
 
-    public IntakeController() {
+    public IntakeController(RobotProperties inputProperties) {
         SmartDashboard.putNumber("intakeSpeed", intakeSpeed);
+        properties = inputProperties;
     }
 
     @Override

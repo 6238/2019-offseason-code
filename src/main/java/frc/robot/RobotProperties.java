@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -15,6 +16,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class RobotProperties {
     JoystickController joystick;
+
+    public static int instanceCount = 0;
 
     public ADXRS450_Gyro gyro;
 
@@ -38,11 +41,17 @@ public class RobotProperties {
     private PowerDistributionPanel pdp;
 
     public RobotProperties() {
+        if (instanceCount > 0) {
+            throw new RuntimeException("Only one RobotProperties instance is allowed per robot!");
+        }
+        
+        instanceCount++;
+
         joystick = new JoystickController(0);
 
-        // gyro = new ADXRS450_Gyro();
+        gyro = new ADXRS450_Gyro(Port.kOnboardCS0);
 
-        pdp = new PowerDistributionPanel(1);
+        pdp = new PowerDistributionPanel();
 
         frontLeft = new WPI_TalonSRX(4);
         frontRight = new WPI_TalonSRX(3);
@@ -66,6 +75,7 @@ public class RobotProperties {
 
         intakeLeft.setInverted(true);
         intakeRight.setInverted(false);
+        System.out.println("make robot drive");
 
         robotDrive = new MecanumDrive(frontLeft, rearLeft, frontRight, rearRight);
     }
@@ -108,7 +118,7 @@ public class RobotProperties {
 
         SmartDashboard.putData("RobotDrive", properties.getRobotDrive());
 
-        // SmartDashboard.putData("Gyro", gyro);
+        SmartDashboard.putData("Gyro", gyro);
         
         SmartDashboard.putData("pdp", pdp);
 

@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
  * @author ishanmadan
  */
 public class ElevatorController implements RobotController {
-    RobotProperties properties = new RobotProperties();
+    RobotProperties properties;
 
     DoubleSolenoid elevatorLeft = properties.getElevatorLeft();
     DoubleSolenoid elevatorRight = properties.getElevatorRight();
@@ -14,8 +14,8 @@ public class ElevatorController implements RobotController {
     boolean elevatorUp = properties.joystick.getButtonSeven();
     boolean elevatorDown = properties.joystick.getButtonEleven();
     
-    public ElevatorController() {
-
+    public ElevatorController(RobotProperties inputProperties) {
+        properties = inputProperties;
     }
 
     @Override

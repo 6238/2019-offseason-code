@@ -32,7 +32,7 @@ public class Robot extends TimedRobot {
   public Robot() {
     properties = new RobotProperties();
     controllers = new ArrayList<RobotController>();
-    controllers.add(new DriveTrainController());
+    controllers.add(new DriveTrainController(properties));
     // controllers.add(new IntakeController());
     // controllers.add(new ElevatorController());
   }
@@ -43,7 +43,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    // properties.gyro.calibrate();
+    properties.gyro.calibrate();
     // m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
     // m_chooser.addOption("My Auto", kCustomAuto);
     // SmartDashboard.putData("Auto choices", m_chooser);

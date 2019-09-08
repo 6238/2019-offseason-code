@@ -9,8 +9,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * @author ishanmadan
  */
 public class DriveTrainController implements RobotController {
-    RobotProperties properties = new RobotProperties();
-    MecanumDrive robotDrive = properties.getRobotDrive();
+    RobotProperties properties;
+    MecanumDrive robotDrive;
     // speed multiplier/reducer
     double insanityFactor = 0.5;
 
@@ -35,7 +35,7 @@ public class DriveTrainController implements RobotController {
     private double headingAngle = 0.0; // the direction the straight driving code aims to stay on
     private double spinFactor = 0.01; // product of heading error & spinFactor is the Z-value given to straight driving code
 
-    public DriveTrainController() {
+    public DriveTrainController(RobotProperties inputProperties) {
         // send values to dashboard
         SmartDashboard.putNumber("insanityFactor", insanityFactor);
         SmartDashboard.putBoolean("reverseDrive", reverseDrive);
@@ -48,6 +48,8 @@ public class DriveTrainController implements RobotController {
         SmartDashboard.putNumber("headingAngle", headingAngle);
         SmartDashboard.putNumber("spinFactor", spinFactor);
         
+        properties = inputProperties;
+        robotDrive = properties.getRobotDrive();
     }
 
     // name function for initial testing
@@ -114,7 +116,7 @@ public class DriveTrainController implements RobotController {
          * WARNING: As of 8/19/19, straightDrive does not work, and should not be used.
          */
 
-        /* if (straightDrive) { // enable alignment mode, only tries to align when driver is not changing joyZ
+        if (straightDrive) { // enable alignment mode, only tries to align when driver is not changing joyZ
             if (properties.joystick.getJoystickZ() == 0) {
                 selfAlign = true; // tell driver selfAlign is working
 
@@ -152,8 +154,8 @@ public class DriveTrainController implements RobotController {
                 }
             }
 
-        } else  */if (joyDrive) {
-            // headingAngle = properties.gyro.getAngle(); // set straightDrive heading to current direction, if driver switches to straightDrive, saved heading will be used
+        } else if (joyDrive) {
+            headingAngle = properties.gyro.getAngle(); // set straightDrive heading to current direction, if driver switches to straightDrive, saved heading will be used
             selfAlign = false; // tell driver selfAlign is not on (obviously)
             if (reverseDrive) {
                 // reverse driving
@@ -164,10 +166,10 @@ public class DriveTrainController implements RobotController {
             } else {
                 // normal driving
                 robotDrive.driveCartesian(insanityFactor * properties.joystick.getJoystickX(), -insanityFactor * properties.joystick.getJoystickY(), insanityFactor * properties.joystick.getJoystickZ());
+                // System.out.println("after joyDrive");
             }
 
         }
-
         if (brakeMode) {
             properties.frontLeft.setNeutralMode(NeutralMode.Brake);
             properties.frontRight.setNeutralMode(NeutralMode.Brake);
