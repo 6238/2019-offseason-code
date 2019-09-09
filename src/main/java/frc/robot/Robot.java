@@ -85,6 +85,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
+    if (properties.joystick.getSlider() < -0.5) {
+      for (RobotController controller : controllers) {
+        controller.performAction(properties);
+      }
+    }
     // switch (m_autoSelected) {
     //   case kCustomAuto:
     //     // Put custom auto code here
