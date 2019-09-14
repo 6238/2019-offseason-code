@@ -19,13 +19,21 @@ public class VisionController implements RobotController {
     private final int fps = 120;
     
     public VisionController(RobotProperties properties) {
-        camera1 = CameraServer.getInstance().startAutomaticCapture(0);
-        camera1.setResolution(width, height);
-        camera1.setFPS(fps);
+        try {
+            camera1 = CameraServer.getInstance().startAutomaticCapture(0);
+            camera1.setResolution(width, height);
+            camera1.setFPS(fps);
+        } catch (Exception e) {
+            System.out.println("Camera 1 (location 0) not found");
+        }
 
-        camera2 = CameraServer.getInstance().startAutomaticCapture(1);
-        camera2.setResolution(width, height);
-        camera2.setFPS(fps);
+        try {
+            camera2 = CameraServer.getInstance().startAutomaticCapture(1);
+            camera2.setResolution(width, height);
+            camera2.setFPS(fps);
+        } catch (Exception e) {
+            System.out.println("Camera 2 (location 1) not found");
+        }
     }
 
     @Override
