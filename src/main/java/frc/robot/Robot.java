@@ -35,6 +35,7 @@ public class Robot extends TimedRobot {
     controllers.add(new DriveTrainController(properties));
     // controllers.add(new IntakeController());
     // controllers.add(new ElevatorController());
+    controllers.add(new VisionController(properties));
   }
 
   /**
