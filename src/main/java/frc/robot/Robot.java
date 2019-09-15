@@ -45,6 +45,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     properties.gyro.calibrate();
+    properties.compressor.setClosedLoopControl(true);
     // m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
     // m_chooser.addOption("My Auto", kCustomAuto);
     // SmartDashboard.putData("Auto choices", m_chooser);

@@ -61,12 +61,12 @@ public class RobotProperties {
         elevatorLeft = new DoubleSolenoid(2, 3);
         elevatorRight = new DoubleSolenoid(4, 5);
 
-        compressor = new Compressor(6);
+        compressor = new Compressor();
 
         intakeLeft = new WPI_TalonSRX(7);
         intakeRight = new WPI_TalonSRX(8);
 
-        intakeSolenoid = new DoubleSolenoid(9, 10);
+        intakeSolenoid = new DoubleSolenoid(0, 1);
 
         frontLeft.setInverted(true);
         frontRight.setInverted(true);
@@ -86,10 +86,6 @@ public class RobotProperties {
 
     public WPI_TalonSRX getIntakeRight() {
         return intakeRight;
-    }
-
-    public Compressor getCompressor() {
-        return compressor;
     }
 
     public DoubleSolenoid getElevatorLeft() {
