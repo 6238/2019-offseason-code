@@ -58,15 +58,15 @@ public class RobotProperties {
         rearLeft = new WPI_TalonSRX(2);
         rearRight = new WPI_TalonSRX(1);
 
-        // elevatorLeft = new DoubleSolenoid(2, 3);
-        // elevatorRight = new DoubleSolenoid(4, 5);
+        elevatorLeft = new DoubleSolenoid(2, 3);
+        elevatorRight = new DoubleSolenoid(4, 5);
 
-        // compressor = new Compressor(6);
+        compressor = new Compressor(6);
 
         intakeLeft = new WPI_TalonSRX(7);
         intakeRight = new WPI_TalonSRX(8);
 
-        // intakeSolenoid = new DoubleSolenoid(9, 10);
+        intakeSolenoid = new DoubleSolenoid(9, 10);
 
         frontLeft.setInverted(true);
         frontRight.setInverted(true);
@@ -88,7 +88,7 @@ public class RobotProperties {
         return intakeRight;
     }
 
-    /* public Compressor getCompressor() {
+    public Compressor getCompressor() {
         return compressor;
     }
 
@@ -98,15 +98,15 @@ public class RobotProperties {
 
     public DoubleSolenoid getElevatorRight() {
         return elevatorRight;
-    } */
+    }
 
     public MecanumDrive getRobotDrive() {
         return robotDrive;
     }
 
-    /* public DoubleSolenoid getIntakeSolenoid() {
+    public DoubleSolenoid getIntakeSolenoid() {
         return intakeSolenoid;
-    } */
+    }
 
     public void pushData(RobotProperties properties) {
         // sends input, data values to SmartDashboard
@@ -122,12 +122,12 @@ public class RobotProperties {
         
         SmartDashboard.putData("pdp", pdp);
 
-        /* SmartDashboard.putData("compressor", compressor);
+        SmartDashboard.putData("compressor", compressor);
         
         SmartDashboard.putData("elevatorLeft", elevatorLeft);
         SmartDashboard.putData("elevatorRight", elevatorRight);
 
-        SmartDashboard.putData("intakeSolenoid", intakeSolenoid); */
+        SmartDashboard.putData("intakeSolenoid", intakeSolenoid);
 
         SmartDashboard.putData("intakeLeft", intakeLeft);
         SmartDashboard.putData("intakeRight", intakeRight);
