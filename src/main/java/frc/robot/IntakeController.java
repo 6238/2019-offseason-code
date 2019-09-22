@@ -11,23 +11,36 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class IntakeController implements RobotController {
     RobotProperties properties;
 
-    WPI_TalonSRX intakeLeft = properties.getIntakeLeft();
-    WPI_TalonSRX intakeRight = properties.getIntakeRight();
+    WPI_TalonSRX intakeLeft;
+    WPI_TalonSRX intakeRight;
 
-    boolean intakeIn = properties.joystick.getButtonThree();
-    boolean intakeOut = properties.joystick.getButtonFive();
+    boolean intakeIn;
+    boolean intakeOut;
 
-    boolean solenoidIn = properties.joystick.getButtonFour();
-    boolean solenoidOut = properties.joystick.getButtonSix();
+    boolean solenoidIn;
+    boolean solenoidOut;
 
-    DoubleSolenoid intakeSolenoid = properties.getIntakeSolenoid();
-
+    DoubleSolenoid intakeSolenoid;
+    
     double intakeSpeed = 0.5;
-
+   
     public IntakeController(RobotProperties inputProperties) {
         SmartDashboard.putNumber("intakeSpeed", intakeSpeed);
         properties = inputProperties;
+
+        intakeLeft = properties.getIntakeLeft();
+        intakeRight = properties.getIntakeRight();
+
+        intakeIn = properties.joystick.getButtonThree();
+        intakeOut = properties.joystick.getButtonFive();
+
+        solenoidIn = properties.joystick.getButtonFour();
+        solenoidOut = properties.joystick.getButtonSix();
+
+        intakeSolenoid = properties.getIntakeSolenoid();
     }
+   
+    
 
     @Override
     public String getName() {

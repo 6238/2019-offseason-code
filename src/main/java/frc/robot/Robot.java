@@ -10,6 +10,7 @@ package frc.robot;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
 // import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 // import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -24,18 +25,15 @@ import edu.wpi.first.wpilibj.TimedRobot;
 public class Robot extends TimedRobot {
   private RobotProperties properties;
   private final List<RobotController> controllers;
+  // Compressor compressor;
   // private static final String kDefaultAuto = "Default";
   // private static final String kCustomAuto = "My Auto";
   // private String m_autoSelected;
   // private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
   public Robot() {
-    properties = new RobotProperties();
     controllers = new ArrayList<RobotController>();
-    controllers.add(new DriveTrainController(properties));
-    // controllers.add(new IntakeController());
-    // controllers.add(new ElevatorController());
-    controllers.add(new VisionController(properties));
+    
   }
 
   /**
@@ -44,11 +42,18 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    properties = new RobotProperties();
     properties.gyro.calibrate();
     properties.compressor.setClosedLoopControl(true);
+
     // m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
     // m_chooser.addOption("My Auto", kCustomAuto);
     // SmartDashboard.putData("Auto choices", m_chooser);
+
+    controllers.add(new DriveTrainController(properties));
+    controllers.add(new IntakeController(properties));
+    // controllers.add(new ElevatorController());
+    controllers.add(new VisionController(properties));
   }
 
   /**

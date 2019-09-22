@@ -27,13 +27,13 @@ public class VisionController implements RobotController {
             System.out.println("Camera 1 (location 0) not found");
         }
 
-        try {
+        /* try {
             camera2 = CameraServer.getInstance().startAutomaticCapture(1);
             camera2.setResolution(width, height);
             camera2.setFPS(fps);
         } catch (Exception e) {
             System.out.println("Camera 2 (location 1) not found");
-        }
+        } */
     }
 
     @Override

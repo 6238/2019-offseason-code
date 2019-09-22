@@ -62,6 +62,7 @@ public class RobotProperties {
         elevatorRight = new DoubleSolenoid(4, 5);
 
         compressor = new Compressor();
+        // compressor.setClosedLoopControl(true);
 
         intakeLeft = new WPI_TalonSRX(7);
         intakeRight = new WPI_TalonSRX(8);
@@ -118,7 +119,7 @@ public class RobotProperties {
         
         SmartDashboard.putData("pdp", pdp);
 
-        SmartDashboard.putData("compressor", compressor);
+        // SmartDashboard.putData("compressor", compressor);
         
         SmartDashboard.putData("elevatorLeft", elevatorLeft);
         SmartDashboard.putData("elevatorRight", elevatorRight);
