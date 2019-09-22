@@ -10,7 +10,6 @@ package frc.robot;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
 // import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 // import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -25,7 +24,6 @@ import edu.wpi.first.wpilibj.TimedRobot;
 public class Robot extends TimedRobot {
   private RobotProperties properties;
   private final List<RobotController> controllers;
-  // Compressor compressor;
   // private static final String kDefaultAuto = "Default";
   // private static final String kCustomAuto = "My Auto";
   // private String m_autoSelected;

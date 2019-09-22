@@ -11,7 +11,7 @@ public class VisionController implements RobotController {
 
     // camera1 is for sandstorm, camera2 is for alignment
     private UsbCamera camera1;
-    private UsbCamera camera2;
+    // private UsbCamera camera2;
 
     // dimensions of the video
     private final int width = 160;
