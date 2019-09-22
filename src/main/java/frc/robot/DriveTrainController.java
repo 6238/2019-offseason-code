@@ -98,7 +98,7 @@ public class DriveTrainController implements RobotController {
          * 
          * absoluteDrive allows the driver to drive relative to the field, rather than the robot
          * itself. Forward would be defined as straight down the field, away from the driver.
-         * absoluteDrive is disabled by default, and may not work.
+         * absoluteDrive is disabled by default.
          * 
          * 
          * straightDrive is a driver-enabled feature that keeps the robot going in one direction when:
@@ -112,8 +112,6 @@ public class DriveTrainController implements RobotController {
          * robot is aligning itself. When the robot stops selfAligning, either because the driver
          * disabled straightDrive or because the driver twisted the joystick, selfAlign will
          * immediately switch off.
-         * 
-         * WARNING: As of 8/19/19, straightDrive does not work, and should not be used.
          */
 
         if (straightDrive) { // enable alignment mode, only tries to align when driver is not changing joyZ
