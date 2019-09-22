@@ -8,14 +8,16 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 public class ElevatorController implements RobotController {
     RobotProperties properties;
 
-    DoubleSolenoid elevatorLeft = properties.getElevatorLeft();
-    DoubleSolenoid elevatorRight = properties.getElevatorRight();
+    DoubleSolenoid elevatorSolenoid;
 
-    boolean elevatorUp = properties.joystick.getButtonSeven();
-    boolean elevatorDown = properties.joystick.getButtonEleven();
+    boolean elevatorUp;
+    boolean elevatorDown;
     
     public ElevatorController(RobotProperties inputProperties) {
         properties = inputProperties;
+        elevatorSolenoid = properties.getElevatorSolenoid();
+        elevatorUp = properties.joystick.getButtonSeven();
+        elevatorDown = properties.joystick.getButtonEleven();
     }
 
     @Override
@@ -29,14 +31,11 @@ public class ElevatorController implements RobotController {
         elevatorDown = properties.joystick.getButtonEleven();
         
         if (elevatorUp) {
-            elevatorLeft.set(DoubleSolenoid.Value.kForward);
-            elevatorRight.set(DoubleSolenoid.Value.kForward);
+            elevatorSolenoid.set(DoubleSolenoid.Value.kForward);
         } else if (elevatorDown) {
-            elevatorLeft.set(DoubleSolenoid.Value.kReverse);
-            elevatorRight.set(DoubleSolenoid.Value.kReverse);
+            elevatorSolenoid.set(DoubleSolenoid.Value.kReverse);
         } else {
-            elevatorLeft.set(DoubleSolenoid.Value.kOff);
-            elevatorRight.set(DoubleSolenoid.Value.kOff);
+            elevatorSolenoid.set(DoubleSolenoid.Value.kOff);
         }
 
         return true;

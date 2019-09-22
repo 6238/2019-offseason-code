@@ -28,8 +28,7 @@ public class RobotProperties {
 
     public Compressor compressor;
 
-    public DoubleSolenoid elevatorLeft;
-    public DoubleSolenoid elevatorRight;
+    public DoubleSolenoid elevatorSolenoid;
 
     public DoubleSolenoid intakeSolenoid;
 
@@ -58,16 +57,14 @@ public class RobotProperties {
         rearLeft = new WPI_TalonSRX(2);
         rearRight = new WPI_TalonSRX(1);
 
-        elevatorLeft = new DoubleSolenoid(2, 3);
-        elevatorRight = new DoubleSolenoid(4, 5);
+        elevatorSolenoid = new DoubleSolenoid(2, 3);
 
         compressor = new Compressor();
-        // compressor.setClosedLoopControl(true);
 
         intakeLeft = new WPI_TalonSRX(7);
         intakeRight = new WPI_TalonSRX(8);
 
-        intakeSolenoid = new DoubleSolenoid(0, 1);
+        intakeSolenoid = new DoubleSolenoid(1, 0);
 
         frontLeft.setInverted(true);
         frontRight.setInverted(true);
@@ -89,12 +86,8 @@ public class RobotProperties {
         return intakeRight;
     }
 
-    public DoubleSolenoid getElevatorLeft() {
-        return elevatorLeft;
-    }
-
-    public DoubleSolenoid getElevatorRight() {
-        return elevatorRight;
+    public DoubleSolenoid getElevatorSolenoid() {
+        return elevatorSolenoid;
     }
 
     public MecanumDrive getRobotDrive() {
@@ -120,13 +113,7 @@ public class RobotProperties {
         SmartDashboard.putData("pdp", pdp);
 
         // SmartDashboard.putData("compressor", compressor);
-        
-        SmartDashboard.putData("elevatorLeft", elevatorLeft);
-        SmartDashboard.putData("elevatorRight", elevatorRight);
-
-        SmartDashboard.putData("intakeSolenoid", intakeSolenoid);
-
-        SmartDashboard.putData("intakeLeft", intakeLeft);
-        SmartDashboard.putData("intakeRight", intakeRight);
+        SmartDashboard.putBoolean("Compressor", compressor.enabled());
+        SmartDashboard.putBoolean("Pressure Switch", compressor.getPressureSwitchValue());
     }
 }
