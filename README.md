@@ -14,6 +14,7 @@ Instructions to deploy and run code can be found below.
 - Select “Open Downloaded File” from window with checkboxes, select OfflineVsCodeFiles.zip
 - Check all boxes in window (unless automatically unchecked)
 - Desktop Icon for VSCode should have been created
+
 ### Mac/Linux:
 - Download Visual Studio Code from [https://code.visualstudio.com](https://code.visualstudio.com) (if on Linux, use .deb)
 - Double click on VSCode .zip or .deb file
@@ -125,6 +126,7 @@ Instructions to deploy and run code can be found below.
 - If "Emergency Shutoff", power cycle the robot
 - If any other message is displayed, look it up or talk to someone who might know
 - Above the message, there should be three green or red boxes with labels, all three should be green
+
 ### Drive/Control the robot
 - Make sure the robot's surroundings are clear and everyone in the workspace knows you are about to run the robot
 - Click enable at the bottom left of the Driver Station window
@@ -133,6 +135,7 @@ Instructions to deploy and run code can be found below.
     - By default, only error messages show up. To enable warnings and prints, click on the settings gear at the top left of the console box
     - Clicking on the settings gear will also give the option to "Show Console" which presents a larger console window and "Show Log File" which shows a graph of all the diagnostics data from the robot, including network, CPU, power, and operation mode
     - Log data can also be found in the Charts tab on the right edge of the Driver Station window
+
 ### Disable the robot
 - Click disable in the bottom left (next to enable)
 - **Any code in robotPeriodic() will continue to run even when the robot is disabled**
