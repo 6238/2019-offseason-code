@@ -50,7 +50,7 @@ public class RobotProperties {
 
         gyro = new ADXRS450_Gyro(Port.kOnboardCS0);
 
-        pdp = new PowerDistributionPanel();
+        // pdp = new PowerDistributionPanel(0);
 
         frontLeft = new WPI_TalonSRX(4);
         frontRight = new WPI_TalonSRX(3);
@@ -110,7 +110,7 @@ public class RobotProperties {
 
         SmartDashboard.putData("Gyro", gyro);
         
-        SmartDashboard.putData("pdp", pdp);
+        // SmartDashboard.putData("pdp", pdp);
 
         // SmartDashboard.putData("compressor", compressor);
         SmartDashboard.putBoolean("Compressor", compressor.enabled());

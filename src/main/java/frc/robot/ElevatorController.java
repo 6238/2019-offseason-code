@@ -16,8 +16,8 @@ public class ElevatorController implements RobotController {
     public ElevatorController(RobotProperties inputProperties) {
         properties = inputProperties;
         elevatorSolenoid = properties.getElevatorSolenoid();
-        elevatorUp = properties.joystick.getButtonSeven();
-        elevatorDown = properties.joystick.getButtonEleven();
+        elevatorUp = properties.joystick.getButtonSix();
+        elevatorDown = properties.joystick.getButtonFour();
     }
 
     @Override
@@ -27,8 +27,8 @@ public class ElevatorController implements RobotController {
 
     @Override
     public boolean performAction(RobotProperties properties) {
-        elevatorUp = properties.joystick.getButtonSeven();
-        elevatorDown = properties.joystick.getButtonEleven();
+        elevatorUp = properties.joystick.getButtonSix();
+        elevatorDown = properties.joystick.getButtonFour();
         
         if (elevatorUp) {
             elevatorSolenoid.set(DoubleSolenoid.Value.kForward);
