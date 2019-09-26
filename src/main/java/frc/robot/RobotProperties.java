@@ -73,7 +73,6 @@ public class RobotProperties {
 
         intakeLeft.setInverted(true);
         intakeRight.setInverted(false);
-        System.out.println("make robot drive");
 
         robotDrive = new MecanumDrive(frontLeft, rearLeft, frontRight, rearRight);
     }
@@ -112,7 +111,6 @@ public class RobotProperties {
         
         // SmartDashboard.putData("pdp", pdp);
 
-        // SmartDashboard.putData("compressor", compressor);
         SmartDashboard.putBoolean("Compressor", compressor.enabled());
         SmartDashboard.putBoolean("Pressure Switch", compressor.getPressureSwitchValue());
     }

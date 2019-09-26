@@ -63,6 +63,9 @@ public class IntakeController implements RobotController {
         } else if (intakeOut) {
             intakeLeft.set(-intakeSpeed);
             intakeRight.set(-intakeSpeed);
+        } else {
+            intakeLeft.set(0);
+            intakeRight.set(0);
         }
 
         /* if (solenoidIn) {
