@@ -30,8 +30,6 @@ public class RobotProperties {
 
     public DoubleSolenoid elevatorSolenoid;
 
-    public DoubleSolenoid intakeSolenoid;
-
     public WPI_TalonSRX intakeLeft;
     public WPI_TalonSRX intakeRight;
 
@@ -64,15 +62,13 @@ public class RobotProperties {
         intakeLeft = new WPI_TalonSRX(7);
         intakeRight = new WPI_TalonSRX(8);
 
-        intakeSolenoid = new DoubleSolenoid(1, 0);
-
         frontLeft.setInverted(true);
         frontRight.setInverted(true);
         rearLeft.setInverted(true);
         rearRight.setInverted(true);
 
-        intakeLeft.setInverted(true);
-        intakeRight.setInverted(false);
+        intakeLeft.setInverted(false);
+        intakeRight.setInverted(true);
 
         robotDrive = new MecanumDrive(frontLeft, rearLeft, frontRight, rearRight);
     }
@@ -91,10 +87,6 @@ public class RobotProperties {
 
     public MecanumDrive getRobotDrive() {
         return robotDrive;
-    }
-
-    public DoubleSolenoid getIntakeSolenoid() {
-        return intakeSolenoid;
     }
 
     public void pushData(RobotProperties properties) {

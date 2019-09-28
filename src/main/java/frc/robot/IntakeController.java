@@ -17,11 +17,6 @@ public class IntakeController implements RobotController {
     boolean intakeIn;
     boolean intakeOut;
 
-    // boolean solenoidIn;
-    // boolean solenoidOut;
-
-    DoubleSolenoid intakeSolenoid;
-    
     double intakeSpeed = 1;
    
     public IntakeController(RobotProperties inputProperties) {
@@ -33,11 +28,6 @@ public class IntakeController implements RobotController {
 
         intakeIn = properties.joystick.getButtonThree();
         intakeOut = properties.joystick.getButtonFive();
-
-        // solenoidIn = properties.joystick.getButtonFour();
-        // solenoidOut = properties.joystick.getButtonSix();
-
-        intakeSolenoid = properties.getIntakeSolenoid();
     }
    
     
@@ -52,9 +42,6 @@ public class IntakeController implements RobotController {
         intakeIn = properties.joystick.getButtonThree();
         intakeOut = properties.joystick.getButtonFive();
 
-        // solenoidIn = properties.joystick.getButtonFour();
-        // solenoidOut = properties.joystick.getButtonSix();
-
         intakeSpeed = SmartDashboard.getNumber("intakeSpeed", intakeSpeed);
         
         if (intakeIn) {
@@ -67,14 +54,6 @@ public class IntakeController implements RobotController {
             intakeLeft.set(0);
             intakeRight.set(0);
         }
-
-        /* if (solenoidIn) {
-            intakeSolenoid.set(DoubleSolenoid.Value.kForward);
-        } else if (solenoidOut) {
-            intakeSolenoid.set(DoubleSolenoid.Value.kReverse);
-        } else {
-            intakeSolenoid.set(DoubleSolenoid.Value.kOff);
-        } */
 
         return true;
     }
