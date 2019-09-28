@@ -52,8 +52,8 @@ public class RobotProperties {
 
         frontLeft = new WPI_TalonSRX(4);
         frontRight = new WPI_TalonSRX(3);
-        rearLeft = new WPI_TalonSRX(2);
-        rearRight = new WPI_TalonSRX(1);
+        rearLeft = new WPI_TalonSRX(1);
+        rearRight = new WPI_TalonSRX(2);
 
         elevatorSolenoid = new DoubleSolenoid(2, 3);
 
@@ -97,7 +97,7 @@ public class RobotProperties {
 
         SmartDashboard.putNumber("Shutoff", properties.joystick.getSlider());
 
-        SmartDashboard.putData("RobotDrive", properties.getRobotDrive());
+        SmartDashboard.putData("robotDrive", properties.getRobotDrive());
 
         SmartDashboard.putData("Gyro", gyro);
         

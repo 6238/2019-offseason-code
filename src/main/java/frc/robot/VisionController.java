@@ -15,7 +15,7 @@ public class VisionController implements RobotController {
 
     // dimensions of the video
     private final int width = 160;
-    private final int height = 120;
+    private final int height = 90;
     private final int fps = 120;
     
     public VisionController(RobotProperties properties) {
