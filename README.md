@@ -3,9 +3,10 @@
 # 6238 FRC Software Install Instructions
 Instructions to deploy and run code can be found below.
 ## FRC Visual Studio Code - Mac, Windows, Linux
-- [https://wpilib.screenstepslive.com/s/currentCS/m/java/l/1027503-installing-c-and-java-development-tools-for-frc](https://wpilib.screenstepslive.com/s/currentCS/m/java/l/1027503-installing-c-and-java-development-tools-for-frc)
-- Download latest version for your OS from [https://github.com/wpilibsuite/allwpilib/releases](https://github.com/wpilibsuite/allwpilib/releases)
-- Necessary to write, build, and deploy code to robot
+- These steps are redundant with the instructions in this file below
+  - [https://wpilib.screenstepslive.com/s/currentCS/m/java/l/1027503-installing-c-and-java-development-tools-for-frc](https://wpilib.screenstepslive.com/s/currentCS/m/java/l/1027503-installing-c-and-java-development-tools-for-frc)
+  - Download latest version for your OS from [https://github.com/wpilibsuite/allwpilib/releases](https://github.com/wpilibsuite/allwpilib/releases)
+  - Necessary to write, build, and deploy code to robot
 
 ### Windows:
 - Launch the installer, go through the screens it gives you:
